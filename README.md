@@ -66,7 +66,15 @@ v
 6. Status display page reflects gate state automatically
 
 ---
+flowchart LR
+    User[User / Operator] -->|Scan QR| Web[Web App<br/>PHP]
+    Web -->|Update Scan| DB[(PostgreSQL)]
+    MCU[ESP32 / Arduino] -->|HTTP Polling| Web
+    MCU -->|Relay Control| Gate[Gate Motor]
+    Web --> Display[Gate Status Display<br/>TV / Monitor]
 
+
+---
 ## 🗄 Database Schema (PostgreSQL)
 
 ```sql
@@ -76,6 +84,7 @@ CREATE TABLE gate_scan (
   scan_count INT DEFAULT 0,
   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+```
 ---
 📡 Polling Strategy
 
@@ -163,5 +172,6 @@ Free to use, modify, and distribute.
 👷 Author
 
 Built as a practical IoT access control project with a focus on reliability, clarity, and future scalability.
+
 
 
