@@ -27,7 +27,7 @@ This project is designed as a **v1 implementation** that prioritizes simplicity,
 ## 🚀 Features
 
 - ✅ HTTP polling-based gate control
-- ✅ Supports ESP32, ESP8266, and Arduino + LAN (W5500)
+- ✅ Supports ESP32, ESP8266, and Arduino + LAN
 - ✅ Offline-first (no internet required)
 - ✅ PHP backend 
 - ✅ PostgreSQL database
@@ -65,4 +65,5 @@ graph TD
 6. Status display page reflects gate state automatically
 
 ---
+
 
