@@ -37,18 +37,19 @@ This project is designed as a **v1 implementation** that prioritizes simplicity,
 
 ---
 
-## 🏗 System Architecture
- 
-### High-Level Architecture
-mermaid
-graph TD
-    A[User / Operator] -->|Scan QR Code| B[Web Application]
-    B -->|HTTP POST| C[PHP Backend]
-    C --> D[(PostgreSQL Database)]
-    E[ESP32 / Arduino] -->|HTTP Polling| C
-    E -->|Relay Control| F[Gate Motor]
-    C --> G[Gate Status Display<br/>(TV / Monitor)]
+## 🏗️ System Architecture
 
+### High-Level Architecture
+
+```mermaid
+graph TD
+    A[User Browser] -->|Audio Stream| B(MediaRecorder API)
+    B -->|30 min chunks| C[PHP Backend]
+    C --> D[File Storage]
+    C --> E[Speech-to-Text Engine]
+    E --> F[Text Result]
+    D --> G[Playback UI]
+```
 
 ---
 
@@ -170,6 +171,7 @@ Free to use, modify, and distribute.
 👷 Author
 
 Built as a practical IoT access control project with a focus on reliability, clarity, and future scalability.
+
 
 
 
