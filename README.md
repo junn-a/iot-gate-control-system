@@ -43,12 +43,13 @@ This project is designed as a **v1 implementation** that prioritizes simplicity,
 
 ```mermaid
 graph TD
-    A[User / Operator] -->|Scan QR Code| B[Web Application]
-    B -->|HTTP POST| C[PHP Backend]
-    C --> D[(PostgreSQL Database)]
-    E[ESP32 / Arduino] -->|HTTP Polling| C
-    E -->|Relay Control| F[Gate Motor]
-    C --> G[Gate Status Display<br/>(TV / Monitor)]
+    A[User Operator] -->|Scan QR Code| B[Web App]
+    B -->|Send Scan Data| C[PHP Server]
+    C --> D[(PostgreSQL)]
+    E[Microcontroller] -->|Poll Status| C
+    E -->|Control Relay| F[Gate]
+    C --> G[Gate Status Display]
+
 ```
 
 ---
@@ -171,6 +172,7 @@ Free to use, modify, and distribute.
 👷 Author
 
 Built as a practical IoT access control project with a focus on reliability, clarity, and future scalability.
+
 
 
 
