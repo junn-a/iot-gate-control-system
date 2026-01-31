@@ -8,9 +8,9 @@
 
 # IoT Gate Control System (HTTP Polling)
 
-A simple, stable, and offline-capable **IoT Gate Control System** using Arduino / ESP microcontrollers with **HTTP polling**, a **PHP backend**, and **PostgreSQL** database.
+A simple, stable, and offline-capable **IoT Gate Control System** using ESP microcontrollers with **HTTP polling**, a **PHP backend**, and **PostgreSQL** database.
 
-This project is designed as a **v1 implementation** that prioritizes simplicity, debuggability, and reliability on local networks (LAN), with a clear upgrade path to real-time protocols such as MQTT.
+This project is designed as a **v1 implementation** that prioritizes simplicity, debuggability, and reliability on networks (WIFI), with a clear upgrade path to real-time protocols such as MQTT.
 
 ---
 
@@ -29,17 +29,16 @@ This project is designed as a **v1 implementation** that prioritizes simplicity,
 - ✅ HTTP polling-based gate control
 - ✅ Supports ESP32, ESP8266, and Arduino + LAN (W5500)
 - ✅ Offline-first (no internet required)
-- ✅ PHP backend (plain PHP, no framework)
+- ✅ PHP backend 
 - ✅ PostgreSQL database
 - ✅ Scan validation logic on server side
 - ✅ Relay control for physical gate
-- ✅ Gate status display for TV / monitor (OPEN / CLOSE)
 
 ---
 
 ## 🏗️ System Architecture
 
-### High-Level Architecture
+### Architecture
 
 ```mermaid
 graph TD
@@ -66,3 +65,4 @@ graph TD
 6. Status display page reflects gate state automatically
 
 ---
+
