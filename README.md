@@ -1,10 +1,9 @@
-![Project](https://img.shields.io/badge/Project-IoT%20Gate%20System-blue)
-![Architecture](https://img.shields.io/badge/Architecture-HTTP%20Polling-orange)
-![Network](https://img.shields.io/badge/Network-Offline%20LAN-success)
-![Backend](https://img.shields.io/badge/Backend-PHP%20%2B%20PostgreSQL-purple)
-![Hardware](https://img.shields.io/badge/Hardware-ESP32%20%7C%20Arduino%20LAN-red)
-![Status](https://img.shields.io/badge/Status-Stable-green)
-![License](https://img.shields.io/badge/License-MIT-lightgrey)
+![System](https://img.shields.io/badge/System-Access%20Gate%20Control-darkblue)
+![Protocol](https://img.shields.io/badge/Protocol-HTTP%20Polling-yellow)
+![Mode](https://img.shields.io/badge/Mode-Offline%20First-success)
+![Deployment](https://img.shields.io/badge/Deployment-On--Premise-informational)
+![Controller](https://img.shields.io/badge/Controller-ESP32%20%7C%20Arduino-orange)
+
 
 
 # IoT Gate Control System (HTTP Polling)
@@ -164,4 +163,5 @@ Free to use, modify, and distribute.
 👷 Author
 
 Built as a practical IoT access control project with a focus on reliability, clarity, and future scalability.
+
 
