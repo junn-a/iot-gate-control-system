@@ -68,36 +68,34 @@ graph TD
 ## 🏗️ Flow Proccess
 ```mermaid
 flowchart TD
-    A["Crew transfer ambil barang dari area picking"]
-    B["Barang ditempatkan di handpallet / pallet mover"]
-    C["Scan barcode barang"]
-    D{Scan valid di WMS?}
-    E["Update stok in-transit & cetak label WHL"]
-    F["ESP8266 polling status scan valid"]
-    G{Status valid diterima ESP?}
-    H["Relay aktif - gate terbuka"]
-    I["Barang melewati gate menggunakan handpallet / pallet mover"]
-    J["Gate menutup otomatis"]
-    K["Barang dikirim ke WHL"]
-    L["Scan gagal / tidak valid"]
-    M["Gate tetap tertutup - barang tidak bisa keluar"]
+    A[Crew ambil barang dari area picking]
+    B[Barang ditempatkan di handpallet atau pallet mover]
+    C[Scan barcode barang]
+    D{Scan valid di WMS}
+    E[Update stok in transit dan cetak label WHL]
+    F[ESP8266 polling status scan]
+    G{Status valid diterima ESP}
+    H[Relay aktif gate terbuka]
+    I[Barang melewati gate dengan handpallet]
+    J[Gate menutup otomatis]
+    K[Barang dikirim ke WHL]
+    L[Scan tidak valid]
+    M[Gate tetap tertutup]
 
     A --> B
     B --> C
     C --> D
-
-    D -- Ya --> E
+    D -->|Ya| E
     E --> F
     F --> G
-    G -- Ya --> H
+    G -->|Ya| H
     H --> I
     I --> J
     J --> K
-
-    D -- Tidak --> L
+    D -->|Tidak| L
     L --> M
 
-
 ---
+
 
 
