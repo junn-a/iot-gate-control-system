@@ -65,5 +65,37 @@ graph TD
 6. Status display page reflects gate state automatically
 
 ---
+## 🏗️ Flow Proccess
+```mermaid
+flowchart TD
+    A[Crew Transfer Ambil Barang dari Area Picking]
+    B[Barang Ditempatkan di Handpallet / Pallet Mover]
+    C[Scan Barcode Barang]
+    D{Scan Valid di WMS?}
+    E[Update Stok In-Transit<br/>Cetak Label WHL]
+    F[ESP8266 Polling Status Scan Valid]
+    G{Status Valid Diterima ESP?}
+    H[Relay Aktif<br/>Gate Terbuka]
+    I[Barang Didorong Melewati Gate<br/>Menggunakan Handpallet / Pallet Mover]
+    J[Gate Menutup Otomatis]
+    K[Barang Dikirim ke WHL]
+    L[Scan Gagal / Tidak Valid<br/>Gate Tetap Tertutup]
+    M[Barang Tidak Bisa Keluar Area Transfer]
 
+    A --> B
+    B --> C
+    C --> D
+
+    D -- Ya --> E
+    E --> F
+    F --> G
+    G -- Ya --> H
+    H --> I
+    I --> J
+    J --> K
+
+    D -- Tidak --> L
+    L --> M
+
+---
 
