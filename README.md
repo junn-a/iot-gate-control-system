@@ -80,6 +80,22 @@ flowchart LR
     B -->|Yes| C --> D --> E --> F
     B -->|No| G
 
+```
+## Activity Diagram
+```mermaid
+flowchart LR
+    A[Pick item & scan barcode]
+    B{Valid in WMS?}
+    C[Update stock & print label]
+    D[ESP activates relay]
+    E[Gate opens]
+    F[Item passes gate]
+    G[Gate closes & send to WHL]
+    H[Reject item]
+
+    A --> B
+    B -->|Yes| C --> D --> E --> F --> G
+    B -->|No| H
 
 
 
