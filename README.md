@@ -81,21 +81,30 @@ flowchart LR
     B -->|No| G
 
 ```
-## Activity Diagram
+## Sequence Diagram (System Interaction)
 ```mermaid
-flowchart LR
-    A[Pick item & scan barcode]
-    B{Valid in WMS?}
-    C[Update stock & print label]
-    D[ESP activates relay]
-    E[Gate opens]
-    F[Item passes gate]
-    G[Gate closes & send to WHL]
-    H[Reject item]
+sequenceDiagram
+    participant Crew
+    participant Scanner
+    participant WMS
+    participant ESP8266
+    participant Gate
 
-    A --> B
-    B -->|Yes| C --> D --> E --> F --> G
-    B -->|No| H
+    Crew->>Scanner: Scan barcode
+    Scanner->>WMS: Send barcode data
+    WMS-->>Scanner: Validation result
+
+    alt Valid
+        WMS->>WMS: Update stock & print label
+        WMS->>ESP8266: Send VALID status
+        ESP8266->>Gate: Activate relay
+        Gate-->>Crew: Gate opens
+        Gate-->>Gate: Auto close
+    else Invalid
+        WMS->>ESP8266: Send INVALID status
+        ESP8266-->>Gate: Keep gate closed
+    end
+
 
 
 
