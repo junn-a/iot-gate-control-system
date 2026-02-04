@@ -114,8 +114,9 @@ sequenceDiagram
 
 
 ### Gate Design
-![Dashboard](doc/Gate Design.jpg)
+![Gate](docs/gate_design.jpg)
 ---
+
 
 
 
