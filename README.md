@@ -113,9 +113,9 @@ sequenceDiagram
 > Gate Design in `/docs` folder
 
 
-### Gate Design
 ![Gate](docs/gate_design.jpg)
 ---
+
 
 
 
