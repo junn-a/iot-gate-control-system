@@ -106,6 +106,16 @@ sequenceDiagram
     end
 
 
+```
+---
+## Design
+
+> Gate Design in `/docs` folder
+
+
+### Gate Design
+![Dashboard](docs/Gate Design.jpg)
+---
 
 
 
