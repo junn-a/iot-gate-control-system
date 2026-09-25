@@ -1,7 +1,7 @@
 /*
   ESP32-S3 Relay Pulse Trigger
   ----------------------------
-  GET http://10.130.48.15/open  -> pulses relay (simulasi tekan tombol)
+  GET http://10.130.48.16/open  -> pulses relay (simulasi tekan tombol)
 
   Dirancang tangguh:
   - Pakai WebServer (bukan raw socket) -> parsing HTTP jauh lebih aman & tidak gampang hang
@@ -14,12 +14,13 @@
 #include <WiFi.h>
 #include <WebServer.h>
 #include "esp_task_wdt.h"
+#include <esp_mac.h> // Library bawaan untuk baca eFuse MAC Address secara langsung
 
 // ===== WIFI CONFIG =====
 const char* ssid     = "IDF_WirelessTAB";
-const char* password = "cikupawifi123";
+const char* password = "BeldenCAT6";
 
-IPAddress local_IP (10, 130, 48, 15);
+IPAddress local_IP (10, 130, 48, 13);
 IPAddress gateway  (10, 130, 48, 5);
 IPAddress subnet   (255, 255, 255, 0);
 IPAddress primaryDNS(10, 126, 48, 1);
@@ -32,7 +33,7 @@ const unsigned long pulseDuration = 300; // ms, lama relay aktif
 const unsigned long triggerDelay  = 1000; // ms, jeda minimum antar trigger (debounce)
 
 bool relayActive = false;
-unsigned long pulseStart  = 0;
+unsigned long pulseStart   = 0;
 unsigned long lastTrigger = 0;
 
 // ===== WIFI RECONNECT STATE =====
@@ -42,6 +43,18 @@ unsigned long wifiDownSince = 0;
 
 // ===== WATCHDOG =====
 const uint32_t WDT_TIMEOUT_S = 8; // detik
+
+// ---------------------------------------------------------
+// Fungsi khusus membaca MAC Address langsung dari eFuse hardware
+void printMacAddress() {
+  uint8_t mac[6];
+  if (esp_read_mac(mac, ESP_MAC_WIFI_STA) == ESP_OK) {
+    Serial.printf("[INFO] MAC Address ESP32-S3: %02X:%02X:%02X:%02X:%02X:%02X\n", 
+                  mac[0], mac[1], mac[2], mac[3], mac[4], mac[5]);
+  } else {
+    Serial.println("[ERROR] Gagal membaca MAC Address!");
+  }
+}
 
 // ---------------------------------------------------------
 void triggerRelay() {
@@ -102,22 +115,21 @@ bool connectWiFi() {
 // ---------------------------------------------------------
 void setup() {
   Serial.begin(115200);
-  delay(100);
+  delay(200); // Tambah jeda sedikit agar Serial stabil
   
-  // Tambahkan baris ini untuk cetak MAC Address ke Serial Monitor
-  Serial.print("[INFO] MAC Address ESP32-S3: ");
-  Serial.println(WiFi.macAddress());
-  
+  // Cetak MAC Address langsung dari eFuse hardware
+  printMacAddress();
+
   pinMode(relayPin, OUTPUT);
   digitalWrite(relayPin, HIGH); // OFF (active LOW)
 
-  // Watchdog
+  // Watchdog re-configuration
   esp_task_wdt_config_t wdt_config = {
     .timeout_ms = WDT_TIMEOUT_S * 1000,
     .idle_core_mask = (1 << portNUM_PROCESSORS) - 1,
     .trigger_panic = true
   };
-  esp_task_wdt_init(&wdt_config);
+  esp_task_wdt_reconfigure(&wdt_config);
   esp_task_wdt_add(NULL);
 
   connectWiFi();
